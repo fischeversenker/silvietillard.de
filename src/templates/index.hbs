@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {{> head}}
+  <title>Silvie Tillard Fotografie</title>
+</head>
+<body>
+  {{> site-header}}
+  <div class="stories">
+    {{#each stories}}
+    <div class="story">
+      <a href="{{path}}">{{title}}</a>
+    </div>
+    {{/each}}
+  </div>
+</body>
+</html>

@@ -1,5 +1,5 @@
 import fsCb, { promises as fs } from 'fs';
-import { join } from 'path';
+import { extname, join } from 'path';
 import { createClient, Entry } from 'contentful';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import Handlebars from 'handlebars';
@@ -18,6 +18,7 @@ interface Story {
   title: string;
   description: any;
   images: Image[];
+  thumbnail: Image;
 }
 
 interface ContactColumn {
@@ -55,12 +56,14 @@ const DIST_FOLDER = 'dist';
       title: image.fields.title,
       url: image.fields.file.url
     }));
+    const thumbnailUrl = item.fields.thumbnail.fields.file.url;
     const path = title.toLowerCase();
     return {
       title,
       description,
       images,
-      path
+      path,
+      thumbnailUrl
     };
   });
 
@@ -121,4 +124,10 @@ function entryIsContact(entry: Entry<any>): entry is Entry<Contact> {
 
 function renderRichText(richText: any): string {
   return documentToHtmlString(richText).replace(/\n/g, `</br>`);
+}
+
+// meant to be used to collect all template styles and compile them and bundle them into the global `styles.css`
+async function collectStyles(): Promise<string[]> {
+  const dirs = await fs.readdir(join(__dirname, 'templates'));
+  return dirs.filter(dir => extname(dir) === '.scss');
 }

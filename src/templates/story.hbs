@@ -6,12 +6,16 @@
 </head>
 <body>
   {{> site-header subpage=true}}
-  <div class="title">{{title}}</div>
 
-  <div class="description">{{{description}}}</div>
+  <div class="story">
+    <div class="story__description">
+      <p>{{title}}</p>
+      <p>{{{description}}}</p>
+    </div>
 
-  {{#each images}}
-  <div class="image"><img src="{{url}}" alt="{{title}}"></div>
-  {{/each}}
+    {{#each images}}
+    <div class="story__image"><img src="{{url}}" alt="{{title}}"></div>
+    {{/each}}
+  </div>
 </body>
 </html>

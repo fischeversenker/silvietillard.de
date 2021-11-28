@@ -6,11 +6,13 @@
 </head>
 <body>
   {{> site-header}}
+
   <div class="stories">
     {{#each stories}}
-    <div class="story">
-      <a href="{{path}}">{{title}}</a>
-    </div>
+    <a href="{{path}}" title="{{title}}" class="story-link">
+      <div class="story-link__thumbnail"><img src="{{thumbnailUrl}}" alt="{{title}}" />
+      <div class="story-link__title">{{title}}</div>
+    </a>
     {{/each}}
   </div>
 </body>

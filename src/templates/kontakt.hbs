@@ -2,10 +2,18 @@
 <html lang="en">
 <head>
   {{> head}}
-  <title>Kontakt | Silvie Tillard Fotografie</title>
+  <title>{{title}} | Silvie Tillard Fotografie</title>
 </head>
 <body>
   {{> site-header subpage=true}}
-  TBD: Kontakt
+  <div class="columns">
+    {{#each columns}}
+    <div class="column">
+      <div class="column-title">{{title}}</div>
+      <div class="column-content">{{{content}}}</div>
+      <div class="column-footer">{{{footer}}}</div>
+    </div>
+    {{/each}}
+  </div>
 </body>
 </html>

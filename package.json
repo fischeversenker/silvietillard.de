@@ -9,7 +9,7 @@
     "precompile": "sass src/styles.scss dist/styles.css",
     "compile": "ts-node -r dotenv/config src/index.ts",
     "serve": "live-server dist",
-    "start": "nodemon -e hbs,ts --exec 'yarn compile'"
+    "start": "nodemon -e hbs,ts,scss --exec 'yarn compile'"
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^15.8.0",

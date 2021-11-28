@@ -1,6 +1,6 @@
 import fsCb, { promises as fs } from 'fs';
 import { join } from 'path';
-import { createClient } from 'contentful';
+import { createClient, Entry } from 'contentful';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import Handlebars from 'handlebars';
 
@@ -14,13 +14,27 @@ interface Image {
   }
 }
 
-interface Entry {
+interface Story {
   title: string;
   description: any;
   images: Image[];
 }
 
-const staticPages = ['kontakt'];
+interface ContactColumn {
+  fields: {
+    title: string;
+    content: any;
+    footer?: any;
+  }
+}
+
+interface Contact {
+  title: string;
+  column1: ContactColumn;
+  column2: ContactColumn;
+  column3: ContactColumn;
+}
+
 const DIST_FOLDER = 'dist';
 
 (async function() {
@@ -31,14 +45,12 @@ const DIST_FOLDER = 'dist';
     space: process.env.CONTENTFUL_SPACE,
     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
   });
-  const entries = await client.getEntries<Entry>();
+  const entries = await client.getEntries<Story | Contact>();
 
-  const rawStoryTemplate = await readFile(join('templates', 'story.hbs'));
-  const storyTemplate = Handlebars.compile(rawStoryTemplate);
-
-  const stories = entries.items.map(item => {
+  const storyItems = entries.items.filter(entryIsStory);
+  const stories = storyItems.map(item => {
     const title = item.fields.title;
-    const description = documentToHtmlString(item.fields.description);
+    const description = renderRichText(item.fields.description);
     const images = item.fields.images.map(image => ({
       title: image.fields.title,
       url: image.fields.file.url
@@ -53,37 +65,30 @@ const DIST_FOLDER = 'dist';
   });
 
   stories.forEach(async story => {
-    const storyFolderPath = join(DIST_FOLDER, story.path);
-    const storyFilePath = join(storyFolderPath, 'index.html');
-    if (!fsCb.existsSync(storyFolderPath)) {
-      await fs.mkdir(storyFolderPath);
-    }
-    await fs.writeFile(storyFilePath, storyTemplate(story), 'utf-8');
-    console.log(`✔ wrote ${storyFilePath}`);
+    applyTemplate({ templateName: 'story', context: story, destinationFolder: story.path });
   });
 
   // index page
+  applyTemplate({ templateName: 'index', context: { stories }, destinationFolder: '.' });
 
-  const rawIndexTemplate = await readFile(join('templates', 'index.hbs'));
-  const indexTemplate = Handlebars.compile(rawIndexTemplate);
-
-  const indexFilePath = join(DIST_FOLDER, 'index.html');
-  await fs.writeFile(indexFilePath, indexTemplate({ stories }));
-  console.log(`✔ wrote ${indexFilePath}`);
-
-  // static pages
-
-  staticPages.forEach(async staticPage => {
-    const rawTemplate = await readFile(join('templates', `${staticPage}.hbs`));
-    const staticPageTemplate = Handlebars.compile(rawTemplate);
-    const staticPageFolderPath = join(DIST_FOLDER, staticPage);
-    const staticPageFilePath = join(staticPageFolderPath, 'index.html');
-    if (!fsCb.existsSync(staticPageFolderPath)) {
-      await fs.mkdir(staticPageFolderPath);
-    }
-    await fs.writeFile(staticPageFilePath, staticPageTemplate({ stories }));
-    console.log(`✔ wrote ${staticPageFilePath}`);
-  });
+  // contact page
+  const contact = entries.items.filter(entryIsContact)[0];
+  const column1 = {
+    title: contact.fields.column1.fields.title,
+    content: renderRichText(contact.fields.column1.fields.content),
+    footer: renderRichText(contact.fields.column1.fields.footer)
+  };
+  const column2 = {
+    title: contact.fields.column2.fields.title,
+    content: renderRichText(contact.fields.column2.fields.content),
+    footer: renderRichText(contact.fields.column2.fields.footer)
+  };
+  const column3 = {
+    title: contact.fields.column3.fields.title,
+    content: renderRichText(contact.fields.column3.fields.content),
+    footer: renderRichText(contact.fields.column3.fields.footer)
+  };
+  applyTemplate({ templateName: 'kontakt', context: { title: contact.fields.title, columns: [column1, column2, column3] } });
 })();
 
 async function readFile(path: string): Promise<string> {
@@ -92,4 +97,28 @@ async function readFile(path: string): Promise<string> {
 
 async function registerPartial(name: string): Promise<void> {
   Handlebars.registerPartial(name, await readFile(join('partials', `${name}.hbs`)));
+}
+
+async function applyTemplate({ templateName, context = {}, destinationFolder = templateName }: { templateName: string, context?: any, destinationFolder?: string }): Promise<void> {
+  const rawTemplate = await readFile(join('templates', `${templateName}.hbs`));
+  const template = Handlebars.compile(rawTemplate);
+  const folderPath = join(DIST_FOLDER, destinationFolder);
+  const filePath = join(folderPath, 'index.html');
+  if (!fsCb.existsSync(folderPath)) {
+    await fs.mkdir(folderPath);
+  }
+  await fs.writeFile(filePath, template(context));
+  console.log(`✔ wrote ${filePath}`);
+}
+
+function entryIsStory(entry: Entry<any>): entry is Entry<Story> {
+  return entry.sys.contentType.sys.id === 'story';
+}
+
+function entryIsContact(entry: Entry<any>): entry is Entry<Contact> {
+  return entry.sys.contentType.sys.id === 'contact';
+}
+
+function renderRichText(richText: any): string {
+  return documentToHtmlString(richText).replace(/\n/g, `</br>`);
 }

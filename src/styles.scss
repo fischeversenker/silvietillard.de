@@ -6,3 +6,8 @@ body, html {
   margin: 0;
   padding: 0;
 }
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+}

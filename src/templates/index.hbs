@@ -9,8 +9,8 @@
 
   <div class="stories">
     {{#each stories}}
-    <a href="{{path}}" title="{{title}}" class="story-link">
-      <div class="story-link__thumbnail"><img src="{{thumbnailUrl}}" alt="{{title}}" />
+    <a href="{{path}}" title="{{title}}" class="story-link" style="background-image: url({{thumbnailUrl}});">
+      {{!-- <div class="story-link__thumbnail"><img src="{{thumbnailUrl}}" alt="{{title}}" /></div> --}}
       <div class="story-link__title">{{title}}</div>
     </a>
     {{/each}}

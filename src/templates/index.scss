@@ -1,0 +1,17 @@
+.stories {
+  display: flex;
+  gap: 32px;
+}
+
+.story-link {
+  position: relative;
+  width: 33.333%;
+  height: 150px;
+  overflow: hidden;
+}
+
+.story-link__title {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}

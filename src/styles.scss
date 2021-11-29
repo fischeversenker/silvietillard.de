@@ -7,7 +7,12 @@ body, html {
   padding: 0;
 }
 
-.site-header {
-  display: flex;
-  justify-content: space-between;
+html {
+  font-family: sans-serif;
+  padding: 16px 32px;
+}
+
+a {
+  color: black;
+  text-decoration: none;
 }

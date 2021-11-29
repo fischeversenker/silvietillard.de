@@ -1,8 +1,9 @@
 import fsCb, { promises as fs } from 'fs';
-import { extname, join } from 'path';
+import { join } from 'path';
 import { createClient, Entry } from 'contentful';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import Handlebars from 'handlebars';
+import { DIST_FOLDER } from './constants';
 
 interface Image {
   fields: {
@@ -36,7 +37,15 @@ interface Contact {
   column3: ContactColumn;
 }
 
-const DIST_FOLDER = 'dist';
+interface Imprint {
+  title: string;
+  content: any;
+}
+
+interface PrivacyStatement {
+  title: string;
+  content: any;
+}
 
 (async function() {
   await registerPartial('site-header');
@@ -46,7 +55,7 @@ const DIST_FOLDER = 'dist';
     space: process.env.CONTENTFUL_SPACE,
     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
   });
-  const entries = await client.getEntries<Story | Contact>();
+  const entries = await client.getEntries<Story | Contact | Imprint | PrivacyStatement>();
 
   const storyItems = entries.items.filter(entryIsStory);
   const stories = storyItems.map(item => {
@@ -75,7 +84,7 @@ const DIST_FOLDER = 'dist';
   applyTemplate({ templateName: 'index', context: { stories }, destinationFolder: '.' });
 
   // contact page
-  const contact = entries.items.filter(entryIsContact)[0];
+  const contact = entries.items.find(entryIsContact);
   const column1 = {
     title: contact.fields.column1.fields.title,
     content: renderRichText(contact.fields.column1.fields.content),
@@ -91,7 +100,23 @@ const DIST_FOLDER = 'dist';
     content: renderRichText(contact.fields.column3.fields.content),
     footer: renderRichText(contact.fields.column3.fields.footer)
   };
-  applyTemplate({ templateName: 'kontakt', context: { title: contact.fields.title, columns: [column1, column2, column3] } });
+  applyTemplate({ templateName: 'contact', context: { title: contact.fields.title, columns: [column1, column2, column3] }, destinationFolder: 'kontakt' });
+
+  // imprint page
+  const imprint = entries.items.find(entryIsImprint);
+  const imprintContext = {
+    title: imprint.fields.title,
+    content: renderRichText(imprint.fields.content)
+  }
+  applyTemplate({ templateName: 'imprint', context: imprintContext, destinationFolder: 'impressum' });
+
+  // privacy statement page
+  const privateStatement = entries.items.find(entryIsPrivacyStatement);
+  const privacyStatemetContext = {
+    title: imprint.fields.title,
+    content: renderRichText(imprint.fields.content)
+  };
+  applyTemplate({ templateName: 'privacy-statement', context: privacyStatemetContext, destinationFolder: 'datenschutzerklaerung' });
 })();
 
 async function readFile(path: string): Promise<string> {
@@ -122,12 +147,14 @@ function entryIsContact(entry: Entry<any>): entry is Entry<Contact> {
   return entry.sys.contentType.sys.id === 'contact';
 }
 
-function renderRichText(richText: any): string {
-  return documentToHtmlString(richText).replace(/\n/g, `</br>`);
+function entryIsImprint(entry: Entry<any>): entry is Entry<Imprint> {
+  return entry.sys.contentType.sys.id === 'imprint';
 }
 
-// meant to be used to collect all template styles and compile them and bundle them into the global `styles.css`
-async function collectStyles(): Promise<string[]> {
-  const dirs = await fs.readdir(join(__dirname, 'templates'));
-  return dirs.filter(dir => extname(dir) === '.scss');
+function entryIsPrivacyStatement(entry: Entry<any>): entry is Entry<PrivacyStatement> {
+  return entry.sys.contentType.sys.id === 'privacyStatement';
+}
+
+function renderRichText(richText: any): string {
+  return documentToHtmlString(richText).replace(/\n/g, `</br>`);
 }

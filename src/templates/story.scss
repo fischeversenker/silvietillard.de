@@ -1,1 +1,11 @@
-// tbd
+.story {
+  display: flex;
+}
+
+.story__description {
+  width: 350px;
+}
+
+.story__image {
+  max-height: 80vh;
+}

@@ -6,14 +6,24 @@
 </head>
 <body>
   {{> site-header subpage=true}}
-  <div class="columns">
-    {{#each columns}}
-    <div class="column">
-      <div class="column-title">{{title}}</div>
-      <div class="column-content">{{{content}}}</div>
-      {{#if footer}}<div class="column-footer">{{{footer}}}</div>{{/if}}
+
+  <main class="contact">
+    <div class="columns columns--head hidden-mobile">
+      {{#each columns}}
+      <div class="column">
+        <div class="column__title">{{title}}</div>
+      </div>
+      {{/each}}
     </div>
-    {{/each}}
-  </div>
+    <div class="columns">
+      {{#each columns}}
+      <div class="column">
+        <div class="column__title hidden-desktop">{{title}}</div>
+        <div class="column__content">{{{content}}}</div>
+        {{#if footer}}<div class="column__footer">{{{footer}}}</div>{{/if}}
+      </div>
+      {{/each}}
+    </div>
+  </main>
 </body>
 </html>

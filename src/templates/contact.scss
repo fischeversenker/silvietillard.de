@@ -1,0 +1,50 @@
+@import '../variables.scss';
+@import '../mixins.scss';
+
+.contact {
+  @include desktop {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+}
+
+.columns {
+  padding: 0 $body-padding;
+
+  @include desktop {
+    display: flex;
+    flex: 1;
+    gap: $grid-gap * 2;
+    padding: 0 $body-padding-desktop;
+  }
+}
+
+.columns.columns--head {
+  flex: 0;
+}
+
+.column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 32px;
+
+  @include desktop {
+    padding-bottom: 0;
+  }
+}
+
+.column__title {
+  font-style: italic;
+  font-size: 1.4rem;
+}
+
+.column__content {
+  flex: 1;
+}
+
+.column__footer {
+  max-width: 80%;
+  font-size: 0.9rem;
+}

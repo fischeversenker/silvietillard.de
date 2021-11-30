@@ -1,16 +1,40 @@
+@import '../variables.scss';
+@import '../mixins.scss';
+
 .stories {
-  display: flex;
-  gap: 32px;
+  padding: 0 $body-padding;
+  height: 100%;
+
+  @include desktop {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 250px);
+    gap: $grid-gap;
+    padding: 0 $body-padding-desktop;
+  }
 }
 
 .story-link {
+  display: block;
   position: relative;
-  width: 33.333%;
-  height: 150px;
+  aspect-ratio: 3 / 1;
   overflow: hidden;
+  background-position: center center;
+  background-size: cover;
+  margin-bottom: 16px;
+
+  @include desktop {
+    margin-bottom: 0;
+    height: 400px;
+    aspect-ratio: auto;
+
+    &:hover {
+      background-size: 110%;
+    }
+  }
 }
 
 .story-link__title {
+  color: white;
   position: absolute;
   bottom: 10px;
   left: 10px;

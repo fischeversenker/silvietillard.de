@@ -1,3 +1,6 @@
+@import './variables.scss';
+@import './mixins.scss';
+
 * {
   box-sizing: border-box;
 }
@@ -8,11 +11,35 @@ body, html {
 }
 
 html {
-  font-family: sans-serif;
-  padding: 16px 32px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 20px;
 }
 
 a {
   color: black;
   text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+main {
+  @include desktop {
+    padding-top: $header-height;
+  }
+}
+
+.hidden-mobile {
+  display: none;
+
+  @include desktop {
+    display: block;
+  }
+}
+
+.hidden-desktop {
+  @include desktop {
+    display: none;
+  }
 }

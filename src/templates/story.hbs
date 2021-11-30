@@ -7,15 +7,20 @@
 <body>
   {{> site-header subpage=true}}
 
-  <div class="story">
-    <div class="story__description">
-      <p>{{title}}</p>
-      <p>{{{description}}}</p>
-    </div>
+  <main>
+    <div class="story">
+      <div class="story__meta">
+        <p class="story__title">{{title}}</p>
+        <p class="story__description">{{{description}}}</p>
+      </div>
 
-    {{#each images}}
-    <img class="story__image" src="{{url}}" alt="{{title}}" />
-    {{/each}}
-  </div>
+      {{#each images}}
+      <figure class="story__image">
+        <img class="story__image-image" src="{{url}}" alt="{{title}}" />
+        {{#if caption}}<figcaption class="story__image-caption">{{caption}}</figcaption>{{/if}}
+      </figure>
+      {{/each}}
+    </div>
+  </main>
 </body>
 </html>

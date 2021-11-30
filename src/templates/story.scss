@@ -1,11 +1,54 @@
+@import '../variables.scss';
+@import '../mixins.scss';
+
 .story {
-  display: flex;
+  padding: 0 $body-padding;
+
+  @include desktop {
+    height: 100%;
+    display: flex;
+    gap: $grid-gap;
+    padding: 0 $body-padding-desktop;
+  }
 }
 
-.story__description {
-  width: 350px;
+.story__meta {
+  @include desktop {
+    min-width: 350px;
+  }
+}
+
+.story__title {
+  font-weight: 700;
 }
 
 .story__image {
-  max-height: 80vh;
+  margin: 0;
+  padding-bottom: 16px;
+
+  @include desktop {
+    padding-bottom: 0;
+
+    &:last-child {
+      padding-right: $body-padding-desktop;
+    }
+  }
+}
+
+.story__image-image {
+  width: 100%;
+
+  @include desktop {
+    max-height: calc(100vh - #{$header-height * 1.5});
+    width: auto;
+  }
+}
+
+.story__image-caption {
+  font-family: 'IBM Plex Mono', monospace;
+  padding-bottom: 16px;
+
+  @include desktop {
+    padding-bottom: 0;
+  }
 }

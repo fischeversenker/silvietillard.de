@@ -1,6 +1,41 @@
-
+@import '../variables.scss';
+@import '../mixins.scss';
 
 .site-header {
-  display: flex;
-  justify-content: space-between;
+  padding: 32px $body-padding;
+
+  @include desktop {
+    position: fixed;
+    display: flex;
+    background-color: white;
+    justify-content: space-between;
+    align-items: flex-start;
+    line-height: 1rem;
+    padding: 32px $body-padding-desktop;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: $header-height;
+    z-index: 1;
+  }
+}
+
+.site-header__title {
+  margin: 0;
+  line-height: 2rem;
+}
+
+.site-header__title h1 {
+  margin: 0;
+}
+
+.site-header__contact {
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: block;
+  margin-top: 16px;
+
+  @include desktop {
+    margin-top: 0;
+  }
 }

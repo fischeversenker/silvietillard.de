@@ -1,0 +1,10 @@
+@import '../variables.scss';
+@import '../mixins.scss';
+
+.imprint {
+  padding: 0 $body-padding;
+
+  @include desktop {
+    padding: 0 $body-padding-desktop;
+  }
+}

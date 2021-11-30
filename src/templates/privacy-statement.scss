@@ -1,0 +1,11 @@
+@import '../variables.scss';
+@import '../mixins.scss';
+
+.privacy-statement {
+  padding: 0 $body-padding;
+  word-wrap: break-word;
+
+  @include desktop {
+    padding: 0 $body-padding-desktop;
+  }
+}

@@ -61,10 +61,13 @@ interface PrivacyStatement {
   const stories = storyItems.map(item => {
     const title = item.fields.title;
     const description = renderRichText(item.fields.description);
-    const images = item.fields.images.map(image => ({
-      title: image.fields.title,
-      url: image.fields.file.url
-    }));
+    const images = item.fields.images.map(image => {
+      return {
+        title: image.fields.title,
+        url: image.fields.file.url,
+        caption: image.fields.description
+      };
+    });
     const thumbnailUrl = item.fields.thumbnail.fields.file.url;
     const path = title.toLowerCase();
     return {

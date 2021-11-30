@@ -51,6 +51,10 @@ interface PrivacyStatement {
   await registerPartial('site-header');
   await registerPartial('head');
 
+  if (!fsCb.existsSync(DIST_FOLDER)) {
+    await fs.mkdir(DIST_FOLDER);
+  }
+
   const client = createClient({
     space: process.env.CONTENTFUL_SPACE,
     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
@@ -69,7 +73,7 @@ interface PrivacyStatement {
       };
     });
     const thumbnailUrl = item.fields.thumbnail.fields.file.url;
-    const path = title.toLowerCase();
+    const path = title.toLowerCase().replace(/ /g, '_');
     return {
       title,
       description,

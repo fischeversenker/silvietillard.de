@@ -112,11 +112,11 @@ interface PrivacyStatement {
 
   // privacy statement page
   const privateStatement = entries.items.find(entryIsPrivacyStatement);
-  const privacyStatemetContext = {
-    title: imprint.fields.title,
-    content: renderRichText(imprint.fields.content)
+  const privacyStatementContext = {
+    title: privateStatement.fields.title,
+    content: renderRichText(privateStatement.fields.content)
   };
-  applyTemplate({ templateName: 'privacy-statement', context: privacyStatemetContext, destinationFolder: 'datenschutzerklaerung' });
+  applyTemplate({ templateName: 'privacy-statement', context: privacyStatementContext, destinationFolder: 'datenschutzerklaerung' });
 })();
 
 async function readFile(path: string): Promise<string> {

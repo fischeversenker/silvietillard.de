@@ -5,6 +5,8 @@ import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import Handlebars from 'handlebars';
 import { DIST_FOLDER } from './constants';
 
+const isProduction = process.env.CONTENTFUL_ENV !== 'preview';
+
 interface Image {
   fields: {
     description: string;
@@ -57,8 +59,8 @@ interface PrivacyStatement {
 
   const client = createClient({
     space: process.env.CONTENTFUL_SPACE,
-    accessToken: process.env.CONTENTFUL_PREVIEW_TOKEN,
-    host: 'preview.contentful.com'
+    accessToken: isProduction ? process.env.CONTENTFUL_ACCESS_TOKEN : process.env.CONTENTFUL_PREVIEW_TOKEN,
+    host: isProduction ? undefined : 'preview.contentful.com'
   });
   const entries = await client.getEntries<Story | Contact | Imprint | PrivacyStatement>();
 

@@ -9,6 +9,7 @@
     "styles": "ts-node src/build-styles.ts",
     "generate": "ts-node -r dotenv/config src/build-pages.ts",
     "build": "yarn generate && yarn styles",
+    "build:preview": "CONTENTFUL_ENV=preview yarn generate && yarn styles",
     "serve": "live-server dist",
     "start": "nodemon -e hbs,ts,scss --exec 'yarn build'"
   },

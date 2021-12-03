@@ -57,7 +57,8 @@ interface PrivacyStatement {
 
   const client = createClient({
     space: process.env.CONTENTFUL_SPACE,
-    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+    accessToken: process.env.CONTENTFUL_PREVIEW_TOKEN,
+    host: 'preview.contentful.com'
   });
   const entries = await client.getEntries<Story | Contact | Imprint | PrivacyStatement>();
 

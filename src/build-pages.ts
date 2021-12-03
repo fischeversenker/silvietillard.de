@@ -78,6 +78,7 @@ interface PrivacyStatement {
     const thumbnailUrl = item.fields.thumbnail.fields.file.url;
     const path = title.toLowerCase().replace(/ /g, '_');
     return {
+      id: item.sys.id,
       title,
       description,
       images,
@@ -88,6 +89,7 @@ interface PrivacyStatement {
 
   stories.forEach(async story => {
     applyTemplate({ templateName: 'story', context: story, destinationFolder: story.path });
+    applyTemplate({ templateName: 'story-redirect', context: story, destinationFolder: story.id });
   });
 
   // index page

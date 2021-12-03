@@ -22,6 +22,7 @@ interface Story {
   description: any;
   images: Image[];
   thumbnail: Image;
+  order?: number;
 }
 
 interface ContactColumn {
@@ -64,7 +65,9 @@ interface PrivacyStatement {
   });
   const entries = await client.getEntries<Story | Contact | Imprint | PrivacyStatement>();
 
-  const storyItems = entries.items.filter(entryIsStory);
+  const storyItems = entries.items.filter(entryIsStory).sort((story, otherStory) => {
+    return (otherStory.fields.order ?? 0) - (story.fields.order ?? 0);
+  });
   const stories = storyItems.map(item => {
     const title = item.fields.title;
     const description = renderRichText(item.fields.description);

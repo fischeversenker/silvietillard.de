@@ -115,7 +115,7 @@ interface PrivacyStatement {
     content: renderRichText(contact.fields.column3.fields.content),
     footer: renderRichText(contact.fields.column3.fields.footer)
   };
-  applyTemplate({ templateName: 'contact', context: { title: contact.fields.title, columns: [column1, column2, column3] }, destinationFolder: 'kontakt' });
+  applyTemplate({ templateName: 'about', context: { title: contact.fields.title, columns: [column1, column2, column3] }, destinationFolder: 'about' });
 
   // imprint page
   const imprint = entries.items.find(entryIsImprint);

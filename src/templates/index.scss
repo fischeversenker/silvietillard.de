@@ -3,39 +3,47 @@
 
 .stories {
   padding: 0 $body-padding;
-  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: $grid-gap;
 
   @include desktop {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 250px);
-    gap: $grid-gap;
     padding: 0 $body-padding-desktop;
+    gap: $grid-gap-desktop;
   }
 }
 
 .story-link {
   display: block;
   position: relative;
-  aspect-ratio: 3 / 1;
-  overflow: hidden;
-  background-position: center center;
-  background-size: cover;
-  margin-bottom: 16px;
 
   @include desktop {
-    margin-bottom: 0;
-    height: 400px;
-    aspect-ratio: auto;
-
     &:hover {
-      background-size: 110%;
+      .story-link__thumbnail {
+        filter: opacity(0.3);
+      }
+
+      .story-link__title {
+        color: red;
+      }
     }
   }
+}
+
+.story-link__thumbnail {
+  height: 500px;
+  width: 100%;
+  object-fit: cover;
+  transition: filter .1s ease-in-out;
 }
 
 .story-link__title {
   color: white;
   position: absolute;
-  bottom: 10px;
-  left: 10px;
+  bottom: 15px;
+  left: 15px;
+  max-width: 50%;
+  font-size: 2.25rem;
+  letter-spacing: 0.04em;
+  transition: color .1s ease-in-out;
 }

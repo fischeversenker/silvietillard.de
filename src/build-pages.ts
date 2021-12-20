@@ -12,6 +12,12 @@ interface Image {
     description: string;
     file: {
       url: string;
+      details: {
+        image: {
+          width: number;
+          height: number;
+        };
+      };
     },
     title: string;
   }
@@ -75,7 +81,8 @@ interface PrivacyStatement {
       return {
         title: image.fields.title,
         url: image.fields.file.url,
-        caption: image.fields.description
+        caption: image.fields.description,
+        size: image.fields.file.details.image
       };
     });
     const thumbnailUrl = item.fields.thumbnail.fields.file.url;

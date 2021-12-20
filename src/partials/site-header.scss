@@ -2,16 +2,19 @@
 @import '../mixins.scss';
 
 .site-header {
-  padding: 32px $body-padding;
+  padding: $body-padding;
+  text-transform: uppercase;
 
   @include desktop {
     position: fixed;
     display: flex;
     background-color: white;
     justify-content: space-between;
-    align-items: flex-start;
-    line-height: 1rem;
-    padding: 32px $body-padding-desktop;
+    align-items: flex-end;
+    font-size: 4rem;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    padding: $body-padding-desktop;
     top: 0;
     left: 0;
     right: 0;
@@ -22,16 +25,20 @@
 
 .site-header__title {
   margin: 0;
-  line-height: 2rem;
 }
 
 .site-header__title h1 {
   margin: 0;
+  font-size: inherit;
 }
 
-.site-header__contact {
+.site-header__back {
   font-size: 1.5rem;
-  font-weight: 700;
+  position: relative;
+  top: -6px;
+}
+
+.site-header__about {
   display: block;
   margin-top: 16px;
 

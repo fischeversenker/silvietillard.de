@@ -1,4 +1,5 @@
 @import '../variables.scss';
+@import '../functions.scss';
 @import '../mixins.scss';
 
 .contact {
@@ -6,6 +7,8 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+    font-size: rem(30px);
+    font-weight: 400;
   }
 }
 
@@ -22,6 +25,12 @@
 
 .columns.columns--head {
   flex: 0;
+  font-weight: 900;
+  padding-bottom: rem(36px);
+}
+
+.columns.columns--head .column {
+  padding-bottom: 0;
 }
 
 .column {
@@ -29,15 +38,6 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 32px;
-
-  @include desktop {
-    padding-bottom: 0;
-  }
-}
-
-.column__title {
-  font-style: italic;
-  font-size: 1.4rem;
 }
 
 .column__content {
@@ -45,6 +45,5 @@
 }
 
 .column__footer {
-  max-width: 80%;
-  font-size: 0.9rem;
+  font-size: rem(20px);
 }

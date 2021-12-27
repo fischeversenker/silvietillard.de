@@ -1,10 +1,18 @@
 @import '../variables.scss';
+@import '../functions.scss';
 @import '../mixins.scss';
 
 .imprint {
   padding: 0 $body-padding;
+  font-size: rem(30px);
+  font-weight: 400;
 
   @include desktop {
     padding: 0 $body-padding-desktop;
   }
+}
+
+.imprint__title {
+  padding-bottom: rem(36px);
+  font-weight: 900;
 }

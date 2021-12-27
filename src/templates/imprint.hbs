@@ -8,7 +8,10 @@
   {{> site-header subpage=true}}
 
   <main>
-    <div class="imprint">{{{content}}}</div>
+    <div class="imprint">
+      <div class="imprint__title">{{title}}</div>
+      <div class="imprint__content">{{{content}}}</div>
+    </div>
   </main>
 </body>
 </html>

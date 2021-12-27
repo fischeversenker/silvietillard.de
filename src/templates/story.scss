@@ -1,4 +1,5 @@
 @import '../variables.scss';
+@import '../functions.scss';
 @import '../mixins.scss';
 
 .story {
@@ -7,19 +8,28 @@
   @include desktop {
     height: 100%;
     display: flex;
-    gap: $grid-gap;
+    gap: $grid-gap-desktop;
     padding: 0 $body-padding-desktop;
+    padding-top: rem(36px);
   }
 }
 
 .story__meta {
   @include desktop {
-    min-width: 350px;
+    font-size: 2.2rem;
+    min-width: 400px;
+    max-width: 400px;
   }
 }
 
 .story__title {
-  font-weight: 700;
+  font-weight: 900;
+  padding-bottom: rem(36px);
+}
+
+.story__description {
+  font-weight: 400;
+  line-height: 1.2;
 }
 
 .story__image {
@@ -39,7 +49,7 @@
   width: 100%;
 
   @include desktop {
-    max-height: calc(100vh - #{$header-height * 1.5});
+    height: calc(100vh - ($header-height + rem(108px)));
     width: auto;
   }
 }

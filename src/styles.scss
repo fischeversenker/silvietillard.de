@@ -1,5 +1,6 @@
 @import './reset.scss';
 @import './variables.scss';
+@import './functions.scss';
 @import './mixins.scss';
 
 * {
@@ -14,6 +15,7 @@ body, html {
 html {
   font-family: 'Titillium Web', sans-serif;
   font-weight: 900;
+  font-size: $html-font-size;
 }
 
 a {
@@ -43,4 +45,8 @@ main {
   @include desktop {
     display: none;
   }
+}
+
+p + p {
+  padding-top: rem(16px);
 }

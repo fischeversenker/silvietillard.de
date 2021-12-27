@@ -1,4 +1,5 @@
 @import '../variables.scss';
+@import '../functions.scss';
 @import '../mixins.scss';
 
 .stories {
@@ -43,7 +44,7 @@
   bottom: 15px;
   left: 15px;
   max-width: 50%;
-  font-size: 2.25rem;
+  font-size: rem(36px);
   letter-spacing: 0.04em;
   transition: color .1s ease-in-out;
 }

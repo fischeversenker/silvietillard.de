@@ -158,6 +158,10 @@ async function applyTemplate({ templateName, context = {}, destinationFolder = t
     await fs.mkdir(folderPath);
   }
   await fs.writeFile(filePath, template(context));
+  const scriptFile = join(__dirname, 'templates', `${templateName}.js`);
+  if (fsCb.existsSync(scriptFile)) {
+    await fs.copyFile(scriptFile, join(folderPath, `${templateName}.js`));
+  }
   console.log(`✔ wrote ${filePath}`);
 }
 

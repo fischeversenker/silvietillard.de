@@ -4,12 +4,14 @@
 
 .stories {
   padding: 0 $body-padding;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  padding-bottom: rem(72px);
   gap: $grid-gap;
 
   @include desktop {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     padding: 0 $body-padding-desktop;
+    padding-bottom: rem(72px);
     gap: $grid-gap-desktop;
   }
 }
@@ -18,7 +20,15 @@
   display: block;
   position: relative;
 
+  + .story-link {
+    padding-top: rem(20px);
+  }
+
   @include desktop {
+    + .story-link {
+      padding-top: 0;
+    }
+
     &:hover {
       .story-link__thumbnail {
         filter: opacity(0.3);

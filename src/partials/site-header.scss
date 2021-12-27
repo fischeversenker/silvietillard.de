@@ -1,9 +1,12 @@
 @import '../variables.scss';
+@import '../functions.scss';
 @import '../mixins.scss';
 
 .site-header {
   padding: $body-padding;
   text-transform: uppercase;
+  font-size: rem(36px);
+  padding-bottom: rem(36px);
 
   @include desktop {
     position: fixed;
@@ -11,7 +14,7 @@
     background-color: white;
     justify-content: space-between;
     align-items: flex-end;
-    font-size: 4rem;
+    font-size: rem(64px);
     font-weight: 900;
     letter-spacing: 0.02em;
     padding: $body-padding-desktop;

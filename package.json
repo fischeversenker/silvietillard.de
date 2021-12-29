@@ -11,7 +11,7 @@
     "build": "yarn generate && yarn styles",
     "build:preview": "CONTENTFUL_ENV=preview yarn generate && yarn styles",
     "serve": "live-server dist",
-    "start": "nodemon -e hbs,ts,scss --exec 'yarn build'"
+    "start": "nodemon -e hbs,ts,js,scss --ignore dist --exec 'yarn build'"
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^15.8.0",
@@ -19,9 +19,11 @@
     "typescript": "^4.5.2"
   },
   "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
     "@types/node": "^16.11.10",
     "@types/sass": "^1.43.1",
     "dotenv": "^10.0.0",
+    "fs-extra": "^10.0.0",
     "handlebars": "^4.7.7",
     "live-server": "^1.2.1",
     "nodemon": "^2.0.15",

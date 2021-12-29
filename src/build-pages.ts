@@ -1,4 +1,5 @@
 import fsCb, { promises as fs } from 'fs';
+import fse from 'fs-extra';
 import { join } from 'path';
 import { createClient, Entry } from 'contentful';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
@@ -139,6 +140,9 @@ interface PrivacyStatement {
     content: renderRichText(privateStatement.fields.content)
   };
   applyTemplate({ templateName: 'privacy-statement', context: privacyStatementContext, destinationFolder: 'datenschutzerklaerung' });
+
+  // copy assets
+  fse.copySync(join(__dirname, '..', 'assets'), join(DIST_FOLDER, 'assets'));
 })();
 
 async function readFile(path: string): Promise<string> {

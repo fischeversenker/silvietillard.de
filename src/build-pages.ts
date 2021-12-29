@@ -154,7 +154,7 @@ async function registerPartial(name: string): Promise<void> {
 }
 
 async function applyTemplate({ templateName, context = {}, destinationFolder = templateName }: { templateName: string, context?: any, destinationFolder?: string }): Promise<void> {
-  const rawTemplate = await readFile(join('templates', `${templateName}.hbs`));
+  const rawTemplate = await readFile(join('templates', templateName, `${templateName}.hbs`));
   const template = Handlebars.compile(rawTemplate);
   const folderPath = join(DIST_FOLDER, destinationFolder);
   const filePath = join(folderPath, 'index.html');
@@ -162,7 +162,7 @@ async function applyTemplate({ templateName, context = {}, destinationFolder = t
     await fs.mkdir(folderPath);
   }
   await fs.writeFile(filePath, template(context));
-  const scriptFile = join(__dirname, 'templates', `${templateName}.js`);
+  const scriptFile = join(__dirname, 'templates', templateName, `${templateName}.js`);
   if (fsCb.existsSync(scriptFile)) {
     await fs.copyFile(scriptFile, join(folderPath, `${templateName}.js`));
   }

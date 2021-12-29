@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs';
+import fsCb, { promises as fs } from 'fs';
 import { extname, join } from 'path';
 import scss from 'sass';
 import { DIST_FOLDER } from './constants';
@@ -14,8 +14,7 @@ import { DIST_FOLDER } from './constants';
   // template styles
   const templatesFolderPath = join(__dirname, 'templates');
   const templatesStyleFiles = await collectStyles(templatesFolderPath);
-  templatesStyleFiles.forEach((fileName) => {
-    const filePath = join(templatesFolderPath, fileName);
+  templatesStyleFiles.forEach((filePath) => {
     const styles = scss.renderSync({ file: filePath });
     collectedStyles = collectedStyles.concat(styles.css.toString());
   });
@@ -23,9 +22,7 @@ import { DIST_FOLDER } from './constants';
   // partial styles
   const partialsFolderPath = join(__dirname, 'partials');
   const partialsStyleFiles = await collectStyles(partialsFolderPath);
-  partialsStyleFiles.forEach((fileName) => {
-    const filePath = join(partialsFolderPath, fileName);
-    console.log(filePath);
+  partialsStyleFiles.forEach((filePath) => {
     const styles = scss.renderSync({ file: filePath });
     collectedStyles = collectedStyles.concat(styles.css.toString());
   });
@@ -37,7 +34,16 @@ import { DIST_FOLDER } from './constants';
 })();
 
 // meant to be used to collect all template styles and compile them and bundle them into the global `styles.css`
-async function collectStyles(folderPath: string): Promise<string[]> {
-  const dirs = await fs.readdir(folderPath);
-  return dirs.filter(dir => extname(dir).endsWith('scss'));
+function collectStyles(folderPath: string): string[] {
+  const dirs = fsCb.readdirSync(folderPath);
+  const stylesFiles: string[] = [];
+  dirs.forEach(dir => {
+    const stats = fsCb.statSync(join(folderPath, dir));
+    if (stats.isDirectory()) {
+      stylesFiles.push(...(collectStyles(join(folderPath, dir))));
+    } else if (extname(dir).endsWith('scss')) {
+      stylesFiles.push(join(folderPath, dir));
+    }
+  });
+  return stylesFiles;
 }

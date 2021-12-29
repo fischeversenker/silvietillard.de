@@ -39,7 +39,14 @@
     let scrollLeftDestination = 0;
 
     if (cursorIsInRightSide) {
-      const imageLeftOffset = storyImage.offsetLeft
+      let imageLeftOffset = storyImage.offsetLeft
+      if (Math.floor(storyImage.getBoundingClientRect().left) <= 32) {
+        const nextSibling = storyImage.nextElementSibling;
+        if (nextSibling) {
+          imageLeftOffset = nextSibling.offsetLeft;
+        }
+      }
+
       scrollLeftDestination = imageLeftOffset - 32;
     } else {
       let previousIntersectingSibling = storyImage.previousElementSibling;

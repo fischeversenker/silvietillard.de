@@ -58,12 +58,12 @@ interface PrivacyStatement {
 }
 
 (async function() {
-  await registerPartial('site-header');
-  await registerPartial('head');
-
   if (!fsCb.existsSync(DIST_FOLDER)) {
     await fs.mkdir(DIST_FOLDER);
   }
+
+  await registerPartial('site-header');
+  await registerPartial('head');
 
   const client = createClient({
     space: process.env.CONTENTFUL_SPACE,

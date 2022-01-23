@@ -34,16 +34,14 @@ main {
 }
 
 .hidden-mobile {
-  display: none;
-
-  @include desktop {
-    display: block;
+  @include mobile {
+    display: none !important;
   }
 }
 
 .hidden-desktop {
   @include desktop {
-    display: none;
+    display: none !important;
   }
 }
 

@@ -15,8 +15,14 @@
 }
 
 .story__meta {
+  padding-top: rem(15px);
+  padding-bottom: rem(15px);
+  font-size: rem(20px);
+
   @include desktop {
     font-size: 2.2rem;
+    padding-top: 0;
+    padding-bottom: 0;
     min-width: 400px;
     max-width: 400px;
   }
@@ -24,7 +30,10 @@
 
 .story__title {
   font-weight: 900;
-  padding-bottom: rem(36px);
+
+  @include desktop {
+    padding-bottom: rem(36px);
+  }
 }
 
 .story__description {
@@ -34,12 +43,12 @@
 
 .story__image {
   margin: 0;
-  padding-bottom: 16px;
+  padding-bottom: rem(25px);
 
   @include desktop {
     padding-bottom: 0;
 
-    &:last-child {
+    &:last-of-type {
       padding-right: $body-padding-desktop;
     }
   }
@@ -56,9 +65,18 @@
 
 .story__image-caption {
   font-family: 'IBM Plex Mono', monospace;
-  padding-bottom: 16px;
 
   @include desktop {
     padding-bottom: 0;
   }
+}
+
+.story__back-button {
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: rem(25px);
+  padding-top: rem(15px);
+  padding-bottom: rem(15px);
+  margin-bottom: rem(25px);
 }

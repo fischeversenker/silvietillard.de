@@ -7,22 +7,24 @@
 <body>
   {{> site-header subpage=true}}
 
-  <main class="contact">
-    <div class="columns columns--head hidden-mobile">
-      {{#each columns}}
-      <div class="column">
-        <div class="column__title">{{title}}</div>
+  <main>
+    <div class="contact">
+      <div class="columns columns--head hidden-mobile">
+        {{#each columns}}
+        <div class="column">
+          <div class="column__title">{{title}}</div>
+        </div>
+        {{/each}}
       </div>
-      {{/each}}
-    </div>
-    <div class="columns">
-      {{#each columns}}
-      <div class="column">
-        <div class="column__title hidden-desktop">{{title}}</div>
-        <div class="column__content">{{{content}}}</div>
-        {{#if footer}}<div class="column__footer">{{{footer}}}</div>{{/if}}
+      <div class="columns">
+        {{#each columns}}
+        <div class="column">
+          <div class="column__title hidden-desktop">{{title}}</div>
+          <div class="column__content">{{{content}}}</div>
+          {{#if footer}}<div class="column__footer">{{{footer}}}</div>{{/if}}
+        </div>
+        {{/each}}
       </div>
-      {{/each}}
     </div>
   </main>
 </body>

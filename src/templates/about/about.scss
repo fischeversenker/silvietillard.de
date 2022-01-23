@@ -3,12 +3,22 @@
 @import '../../mixins.scss';
 
 .contact {
+  font-size: rem(20px);
+  font-weight: 400;
+  padding-top: rem(15px);
+
   @include desktop {
     display: flex;
     flex-direction: column;
     height: 100vh;
     font-size: rem(30px);
-    font-weight: 400;
+    padding-top: initial;
+  }
+
+  @include mobile {
+    a {
+      text-decoration: underline;
+    }
   }
 }
 
@@ -40,10 +50,15 @@
   padding-bottom: 32px;
 }
 
+.column__title {
+  font-weight: 900;
+}
+
 .column__content {
   flex: 1;
 }
 
 .column__footer {
-  font-size: rem(20px);
+  padding-top: rem(15px);
+  font-size: rem(12px);
 }

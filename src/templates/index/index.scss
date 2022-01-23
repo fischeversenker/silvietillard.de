@@ -21,7 +21,7 @@
   position: relative;
 
   + .story-link {
-    padding-top: rem(20px);
+    padding-top: rem(15px);
   }
 
   @include desktop {
@@ -54,7 +54,11 @@
   bottom: 15px;
   left: 15px;
   max-width: 50%;
-  font-size: rem(36px);
+  font-size: rem(25px);
   letter-spacing: 0.04em;
   transition: color .1s ease-in-out;
+
+  @include desktop {
+    font-size: rem(36px);
+  }
 }

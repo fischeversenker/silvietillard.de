@@ -6,7 +6,7 @@
   padding: $body-padding;
   text-transform: uppercase;
   font-size: rem(36px);
-  padding-bottom: rem(36px);
+  padding-bottom: rem(15px);
 
   @include desktop {
     position: fixed;
@@ -18,6 +18,7 @@
     font-weight: 900;
     letter-spacing: 0.02em;
     padding: $body-padding-desktop;
+    padding-bottom: rem(36px);
     top: 0;
     left: 0;
     right: 0;

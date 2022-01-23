@@ -18,6 +18,10 @@ html {
   font-size: $html-font-size;
 }
 
+body.prevent-scroll {
+  overflow: hidden;
+}
+
 a {
   color: black;
   text-decoration: none;

@@ -151,6 +151,11 @@ async function readFile(path: string): Promise<string> {
 
 async function registerPartial(name: string): Promise<void> {
   Handlebars.registerPartial(name, await readFile(join('partials', `${name}.hbs`)));
+
+  const scriptFile = join(__dirname, 'partials', `${name}.js`);
+  if (fsCb.existsSync(scriptFile)) {
+    await fs.copyFile(scriptFile, join(DIST_FOLDER, `${name}.js`));
+  }
 }
 
 async function applyTemplate({ templateName, context = {}, destinationFolder = templateName }: { templateName: string, context?: any, destinationFolder?: string }): Promise<void> {
@@ -162,10 +167,12 @@ async function applyTemplate({ templateName, context = {}, destinationFolder = t
     await fs.mkdir(folderPath);
   }
   await fs.writeFile(filePath, template(context));
+
   const scriptFile = join(__dirname, 'templates', templateName, `${templateName}.js`);
   if (fsCb.existsSync(scriptFile)) {
     await fs.copyFile(scriptFile, join(folderPath, `${templateName}.js`));
   }
+
   console.log(`✔ wrote ${filePath}`);
 }
 

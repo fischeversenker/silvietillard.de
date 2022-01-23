@@ -11,7 +11,7 @@
     "build": "yarn generate && yarn styles",
     "build:preview": "CONTENTFUL_ENV=preview yarn generate && yarn styles",
     "serve": "live-server dist",
-    "start": "nodemon -e hbs,ts,js,scss --ignore dist --exec 'yarn styles'"
+    "start": "nodemon -e hbs,ts,js,scss --ignore dist --exec 'yarn generate'"
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^15.8.0",

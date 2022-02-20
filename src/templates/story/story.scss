@@ -6,7 +6,7 @@
   padding: 0 $body-padding;
 
   @include desktop {
-    height: 100%;
+    height: calc(100vh - ($header-height-desktop + rem(36px)));
     display: flex;
     gap: $grid-gap-desktop;
     padding: 0 $body-padding-desktop;
@@ -42,32 +42,17 @@
 }
 
 .story__image {
-  margin: 0;
+  width: 100%;
   padding-bottom: rem(25px);
 
   @include desktop {
+    height: 100%;
+    width: auto;
     padding-bottom: 0;
 
     &:last-of-type {
       padding-right: $body-padding-desktop;
     }
-  }
-}
-
-.story__image-image {
-  width: 100%;
-
-  @include desktop {
-    height: calc(100vh - ($header-height-desktop + rem(70px)));
-    width: auto;
-  }
-}
-
-.story__image-caption {
-  font-family: 'IBM Plex Mono', monospace;
-
-  @include desktop {
-    padding-bottom: 0;
   }
 }
 

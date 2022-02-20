@@ -10,7 +10,7 @@
   @include desktop {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: calc(100vh - $header-height-desktop);
     font-size: rem(30px);
     padding-top: initial;
   }

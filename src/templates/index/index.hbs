@@ -3,12 +3,18 @@
 <head>
   {{> head}}
   <title>Silvie Tillard Fotografie</title>
+  {{!-- https://github.com/desandro/colcade --}}
+  <script src="https://unpkg.com/colcade@0/colcade.js"></script>
 </head>
 <body>
   {{> site-header}}
 
   <main>
-    <div class="stories">
+    <div class="stories" data-colcade="columns: .grid-col, items: .story-link">
+      <div class="grid-col grid-col--1"></div>
+      <div class="grid-col grid-col--2"></div>
+      <div class="grid-col grid-col--3"></div>
+      <div class="grid-col grid-col--4"></div>
       {{#each stories}}
       <a href="{{path}}" title="{{title}}" class="story-link">
         <img class="story-link__thumbnail" src="{{thumbnailUrl}}" alt="{{title}}" />

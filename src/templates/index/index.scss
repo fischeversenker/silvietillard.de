@@ -8,11 +8,10 @@
   gap: $grid-gap;
 
   @include desktop {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    display: flex;
+    gap: rem(36px);
     padding: 0 $body-padding-desktop;
     padding-bottom: rem(72px);
-    gap: $grid-gap-desktop;
   }
 }
 
@@ -26,7 +25,7 @@
 
   @include desktop {
     + .story-link {
-      padding-top: 0;
+      padding-top: rem(36px);
     }
 
     &:hover {
@@ -42,7 +41,6 @@
 }
 
 .story-link__thumbnail {
-  height: 500px;
   width: 100%;
   object-fit: cover;
   transition: filter .1s ease-in-out;
@@ -61,4 +59,27 @@
   @include desktop {
     font-size: rem(36px);
   }
+}
+
+// Colcade setup
+.grid-col {
+  flex-grow: 1;
+}
+
+/* 2 columns by default, hide columns 2 & 3 */
+.grid-col--2, .grid-col--3, .grid-col--4 { display: none }
+
+/* 3 columns at medium size */
+@media ( min-width: $breakpoint-sm ) {
+  .grid-col--2 { display: block; } /* show column 2 */
+}
+
+/* 3 columns at medium size */
+@media ( min-width: 1200px ) {
+  .grid-col--3 { display: block; } /* show column 2 */
+}
+
+/* 4 columns at large size */
+@media ( min-width: 1600px ) {
+  .grid-col--4 { display: block; } /* show column 3 */
 }

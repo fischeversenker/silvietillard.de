@@ -59,10 +59,11 @@
 
 .site-header__menu-button {
   position: absolute;
-  top: rem(22px);
-  right: rem(15px);
-  width: rem(30px);
-  height: rem(30px);
+  top: rem(7px);
+  right: 0;
+  width: rem(60px);
+  height: rem(60px);
+  padding: rem(15px);
   color: black;
 
   > span {

@@ -14,7 +14,7 @@
     background-color: white;
     justify-content: space-between;
     align-items: center;
-    font-size: rem(64px);
+    font-size: rem(48px);
     font-weight: 900;
     letter-spacing: 0.02em;
     padding: $body-padding-desktop;
@@ -25,6 +25,10 @@
     right: 0;
     height: $header-height-desktop;
     z-index: 1;
+
+    @media (min-width: 1300px) {
+      font-size: rem(64px);
+    }
   }
 }
 
@@ -39,8 +43,7 @@
 
 .site-header__back {
   font-size: 1.5rem;
-  position: relative;
-  top: -6px;
+  align-self: flex-end;
 }
 
 .site-header__back-arrow {

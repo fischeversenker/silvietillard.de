@@ -13,16 +13,17 @@
     display: flex;
     background-color: white;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
     font-size: rem(64px);
     font-weight: 900;
     letter-spacing: 0.02em;
     padding: $body-padding-desktop;
+    padding-top: rem(30px);
     padding-bottom: rem(36px);
     top: 0;
     left: 0;
     right: 0;
-    height: $header-height;
+    height: $header-height-desktop;
     z-index: 1;
   }
 }

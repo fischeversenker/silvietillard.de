@@ -33,7 +33,7 @@ a {
 
 main {
   @include desktop {
-    padding-top: $header-height;
+    padding-top: $header-height-desktop;
   }
 }
 

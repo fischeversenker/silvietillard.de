@@ -78,7 +78,7 @@ interface PrivacyStatement {
   const stories = storyItems.map(item => {
     const title = item.fields.title;
     const description = renderRichText(item.fields.description);
-    const images = item.fields.images.map(image => {
+    const images = item.fields.images.filter(image => image.fields).map(image => {
       return {
         title: image.fields.title,
         url: image.fields.file.url,
@@ -86,7 +86,7 @@ interface PrivacyStatement {
         size: image.fields.file.details.image
       };
     });
-    const thumbnailUrl = item.fields.thumbnail.fields.file.url;
+    const thumbnailUrl = item.fields.thumbnail.fields?.file.url ?? '';
     const path = title.toLowerCase().replace(/ /g, '_');
     return {
       id: item.sys.id,

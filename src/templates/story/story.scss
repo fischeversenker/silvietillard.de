@@ -6,11 +6,11 @@
   padding: 0 $body-padding;
 
   @include desktop {
-    height: calc(100vh - ($header-height-desktop + rem(36px)));
+    height: calc(100vh - ($header-height-desktop + $grid-gap-desktop));
     display: flex;
     gap: $grid-gap-desktop;
     padding: 0 $body-padding-desktop;
-    padding-top: rem(36px);
+    padding-top: $grid-gap-desktop;
   }
 }
 
@@ -20,7 +20,7 @@
   font-size: rem(20px);
 
   @include desktop {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     padding-top: 0;
     padding-bottom: 0;
     min-width: 400px;

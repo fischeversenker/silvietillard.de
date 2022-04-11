@@ -4,14 +4,14 @@
 
 .stories {
   padding: 0 $body-padding;
-  padding-bottom: rem(72px);
+  padding-bottom: calc($body-padding * 3);
   gap: $grid-gap;
 
   @include desktop {
     display: flex;
-    gap: rem(36px);
+    gap: $grid-gap-desktop;
     padding: 0 $body-padding-desktop;
-    padding-bottom: rem(72px);
+    padding-bottom: calc($body-padding-desktop * 3);
   }
 }
 
@@ -20,12 +20,12 @@
   position: relative;
 
   + .story-link {
-    padding-top: rem(15px);
+    padding-top: $body-padding;
   }
 
   @include desktop {
     + .story-link {
-      padding-top: rem(36px);
+      padding-top: $body-padding-desktop;
     }
 
     &:hover {
@@ -43,21 +43,21 @@
 .story-link__thumbnail {
   width: 100%;
   object-fit: cover;
-  transition: filter .1s ease-in-out;
+  transition: filter 0.1s ease-in-out;
 }
 
 .story-link__title {
   color: white;
   position: absolute;
-  bottom: 15px;
-  left: 15px;
+  bottom: 12px;
+  left: 12px;
   max-width: 50%;
-  font-size: rem(25px);
+  font-size: rem(20px);
   letter-spacing: 0.04em;
-  transition: color .1s ease-in-out;
+  transition: color 0.1s ease-in-out;
 
   @include desktop {
-    font-size: rem(36px);
+    font-size: rem(28px);
   }
 }
 
@@ -66,20 +66,24 @@
   flex-grow: 1;
 }
 
-/* 2 columns by default, hide columns 2 & 3 */
-.grid-col--2, .grid-col--3, .grid-col--4 { display: none }
-
-/* 3 columns at medium size */
-@media ( min-width: $breakpoint-sm ) {
-  .grid-col--2 { display: block; } /* show column 2 */
+/* 1 column by default, hide columns 2 & 3 & 4 */
+.grid-col--2,
+.grid-col--3,
+.grid-col--4 {
+  display: none;
 }
 
 /* 3 columns at medium size */
-@media ( min-width: 1200px ) {
-  .grid-col--3 { display: block; } /* show column 2 */
+@media (min-width: $breakpoint-sm) {
+  .grid-col--2,
+  .grid-col--3 {
+    display: block;
+  }
 }
 
-/* 4 columns at large size */
-@media ( min-width: 1600px ) {
-  .grid-col--4 { display: block; } /* show column 3 */
+/* 4 columns at medium size */
+@media (min-width: 1200px) {
+  .grid-col--4 {
+    display: block;
+  }
 }

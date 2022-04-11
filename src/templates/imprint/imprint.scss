@@ -8,8 +8,10 @@
   font-size: rem(20px);
 
   @include desktop {
-    font-size: rem(30px);
+    font-size: rem(24px);
     padding: 0 $body-padding-desktop;
+    padding-top: rem(20px);
+    line-height: 1.1;
   }
 }
 

@@ -11,8 +11,9 @@
     display: flex;
     flex-direction: column;
     height: calc(100vh - $header-height-desktop);
-    font-size: rem(30px);
-    padding-top: initial;
+    font-size: rem(24px);
+    padding-top: rem(20px);
+    line-height: 1.1;
   }
 
   @include mobile {
@@ -60,5 +61,5 @@
 
 .column__footer {
   padding-top: rem(15px);
-  font-size: rem(12px);
+  font-size: rem(15px);
 }

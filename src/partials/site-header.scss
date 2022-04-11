@@ -14,12 +14,12 @@
     background-color: white;
     justify-content: space-between;
     align-items: center;
-    font-size: rem(48px);
+    font-size: rem(46px);
     font-weight: 900;
     letter-spacing: 0.02em;
     padding: $body-padding-desktop;
-    padding-top: rem(30px);
-    padding-bottom: rem(36px);
+    padding-top: rem(24px);
+    padding-bottom: rem(24px);
     top: 0;
     left: 0;
     right: 0;
@@ -27,7 +27,7 @@
     z-index: 1;
 
     @media (min-width: 1300px) {
-      font-size: rem(64px);
+      font-size: rem(51px);
     }
   }
 }
@@ -42,7 +42,7 @@
 }
 
 .site-header__back {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   align-self: flex-end;
 }
 

@@ -2,6 +2,7 @@ import fsCb, { promises as fs } from 'fs';
 import fse from 'fs-extra';
 import { join } from 'path';
 import { createClient, Entry } from 'contentful';
+import { BLOCKS, Block } from '@contentful/rich-text-types';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import Handlebars from 'handlebars';
 import { DIST_FOLDER } from './constants';
@@ -193,5 +194,10 @@ function entryIsPrivacyStatement(entry: Entry<any>): entry is Entry<PrivacyState
 }
 
 function renderRichText(richText: any): string {
-  return documentToHtmlString(richText).replace(/\n/g, `</br>`);
+  const renderOptions = {
+    renderNode: {
+      [BLOCKS.EMBEDDED_ASSET]: (node: Block) => `<p><img src="${node.data.target.fields.file.url}" title="${node.data.target.fields.title}"></p>`
+    }
+  }
+  return documentToHtmlString(richText, renderOptions).replace(/\n/g, `</br>`);
 }

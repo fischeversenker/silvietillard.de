@@ -88,7 +88,7 @@ interface PrivacyStatement {
       };
     });
     const thumbnailUrl = item.fields.thumbnail.fields?.file.url ?? '';
-    const path = title.toLowerCase().replace(/ /g, '_');
+    const path = title.toLowerCase().replace(/ /g, '_').replace(/\//g, '_');
     return {
       id: item.sys.id,
       title,
